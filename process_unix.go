@@ -18,7 +18,8 @@ type UnixProcess struct {
 	pgrp  int
 	sid   int
 
-	binary string
+	binary  string // binary name might be truncated
+	cmdline string
 }
 
 func (p *UnixProcess) Pid() int {
@@ -31,6 +32,10 @@ func (p *UnixProcess) PPid() int {
 
 func (p *UnixProcess) Executable() string {
 	return p.binary
+}
+
+func (p *UnixProcess) Cmdline() string {
+	return p.cmdline
 }
 
 func findProcess(pid int) (Process, error) {
